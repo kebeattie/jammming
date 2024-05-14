@@ -1,10 +1,15 @@
 import './App.module.css';
 import React from 'react';
+import SearchBar from '../SearchBar/SearchBar';
 
 function App() {
+  
+
   return (
-    <div className="App">
-      <h1>Hello</h1>
+    <div className='App'>
+      <header><h1>Jammming</h1></header>
+      <SearchBar />
+
     </div>
   );
 }

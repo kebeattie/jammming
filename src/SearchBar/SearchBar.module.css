@@ -1,0 +1,13 @@
+form {
+    width: 100vw;
+    display: flex;
+    justify-content: center;
+}
+
+input {
+    width: 30vw;
+    border-radius: 10px;
+    height: 3vh;
+    margin-top: 20px;
+    
+}
