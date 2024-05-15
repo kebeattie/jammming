@@ -18,7 +18,8 @@ export default function Track(props) {
                 </div>
                 <div className={styles.rightSide}>
 
-                    <p className={styles.addButton}>&#43;</p>
+                     {props.add  && <p className={styles.addButton}>&#43;</p>} 
+                     {!props.add && <p className={styles.addButton}>&#8722;</p>}
 
                 </div>
 

@@ -3,6 +3,7 @@ import React, { useState } from 'react';
 import SearchBar from '../SearchBar/SearchBar';
 //import Track from '../Track/Track';
 import SearchResults from '../SearchResults/SearchResults';
+import Playlist from '../Playlist/Playlist';
 
 function App() {
 
@@ -41,6 +42,23 @@ function App() {
       id: '3'
     }
 
+  ];
+
+  const trackList = [
+    {
+    
+        name: "Gorilla",
+        album: "No Thank You",
+        artist: "Little Simz",
+        id: '1'
+  
+    },
+    {
+      name: "How Much",
+      album: "Grime MC",
+      artist: "JME",
+      id: '3'
+    }
   ];
 
   const searchResults = []; //Array to store results from each search, will be set to searchResultsState
@@ -83,6 +101,7 @@ function App() {
       <SearchBar userInput={userInput} onChange={handleUserInputChange} searchForTracks={searchForTracks} tracks={searchResultsState} />
       <div className={styles.container}>
         <SearchResults key={searchResultsState} tracks={searchResultsState} />
+        <Playlist tracks={trackList}/>
       </div>
 
     </div>
