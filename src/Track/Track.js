@@ -1,12 +1,13 @@
 import React from 'react';
-import './Track.module.css';
+import styles from './Track.module.css';
 
 export default function Track(props) {
     return (
         <>
-            <div className='trackContainer'>
+            <div className={styles.trackContainer}>
                 <h3>{props.name}</h3>
-                <p>{props.artist} {props.album}</p>
+                <p><span className={styles.artist}>{props.artist}</span><span className={styles.vl}></span><span className={styles.album}>{props.album}</span></p>
+                <hr />
                 
             </div>
         </>

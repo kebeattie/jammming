@@ -1,0 +1,20 @@
+.trackContainer {
+    /* text-align: left; */
+    /* display: flex; */
+    /* justify-content: center; */
+    /* align-items: center; */
+    /* flex-direction: column; */
+}
+
+.vl {
+    border-left: 1px solid black;
+    height: 10%;
+  }
+
+  .artist {
+    padding-right: 5px;
+  }
+
+  .album {
+    padding-left: 5px;
+  }

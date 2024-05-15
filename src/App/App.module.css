@@ -19,3 +19,8 @@ h1 {
   color: rgb(250, 176, 213);
 }
 
+.container {
+  display: flex;
+  justify-content: space-evenly;
+}
+
