@@ -1,13 +1,33 @@
 form {
-    width: 100vw;
+    /* width: 100vw; */
     display: flex;
+    flex-direction: column;
     justify-content: center;
+    align-items: center;
 }
 
 input {
     width: 30vw;
     border-radius: 10px;
-    height: 3vh;
+    height: 10vh;
     margin-top: 20px;
+    font-size: 1.6rem;
+}
+
+.container {
+    display: flex;
+    justify-content: center;
     
+}
+
+.searchButton {
+    margin-top: 10px;
+    width: 25%;
+    border-radius: 60px;
+    height: 60%;
+    font-size: 1.6rem;
+}
+
+.searchButton:hover {
+    cursor: pointer;
 }
