@@ -13,6 +13,8 @@ function App() {
   const [searchResultsState, setSearchResultsState] = useState([]);
   //Track state of the current tracklist
   const [trackList, setTracklist] = useState([]);
+  //Track state of playlsit name
+  const [playlistName, setPlaylistName] = useState('')
 
   //Fake track data to feed to track component until we connect to API 
   const tracks = [
@@ -74,32 +76,36 @@ function App() {
   };
 
 
+  //Event handlers for updating states
 
   //Handler to track state change for user input
   const handleUserInputChange = (input) => {
     setUserInput(input);
-  }
-
-
+  };
+  //Handler to change state of tracklist on addition of track
   const addTrackHandler = (addTrack) => {
+    //Check if the selected track is already in the tracklist
     if(!JSON.stringify(trackList).includes(JSON.stringify(addTrack))) {
       setTracklist([...trackList, addTrack]);
     }
     else {
       alert('This track is already in the current playlist.')
-    }
-    
-    
-    
-  }
-
+    } 
+  };
+  //Handler to change state of tracklist on removal of track
   const removeTrackHandler = (removeTrack) => {
     const newList = trackList.filter((track) => JSON.stringify(track)!== JSON.stringify(removeTrack));
     console.log(newList);
 
-    setTracklist(newList);
-    
+    setTracklist(newList); 
+  };
+  //Handler to change state of playlist name
+  const handlePlaylistName = (input) => {
+    setPlaylistName(input);
   }
+
+
+
 
   return (
     <div className='App'>
@@ -107,7 +113,7 @@ function App() {
       <SearchBar userInput={userInput} onChange={handleUserInputChange} searchForTracks={searchForTracks} tracks={searchResultsState} />
       <div className={styles.container}>
         <SearchResults key={searchResultsState} tracks={searchResultsState} trackList={trackList} addTrackHandler={addTrackHandler} />
-        <Playlist tracks={trackList} removeTrackHandler={removeTrackHandler}/>
+        <Playlist tracks={trackList} removeTrackHandler={removeTrackHandler} handlePlaylistName={handlePlaylistName}/>
       </div>
 
     </div>
