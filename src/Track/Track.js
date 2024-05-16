@@ -8,7 +8,7 @@ export default function Track(props) {
             name: props.name,
             album: props.album,
             artist: props.artist,
-            id: props.id
+            uri: props.uri
         }
 
         props.addTrackHandler(track);
@@ -19,7 +19,7 @@ export default function Track(props) {
             name: props.name,
             album: props.album,
             artist: props.artist,
-            id: props.id
+            uri: props.uri
         }
 
         props.removeTrackHandler(track);

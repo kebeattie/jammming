@@ -22,13 +22,13 @@ function App() {
       name: "Man Don't Care",
       album: "Integrity",
       artist: "JME",
-      id: '0'
+      uri: '0'
     },
     {
       name: "Gorilla",
       album: "No Thank You",
       artist: "Little Simz",
-      id: '1'
+      uri: '1'
 
     },
 
@@ -36,14 +36,14 @@ function App() {
       name: "Uptown Top Ranking",
       album: "Uptown Top Ranking",
       artist: "Althea & Donna",
-      id: '2'
+      uri: '2'
     },
 
     {
       name: "How Much",
       album: "Grime MC",
       artist: "JME",
-      id: '3'
+      uri: '3'
     }
 
   ];
@@ -102,7 +102,16 @@ function App() {
   //Handler to change state of playlist name
   const handlePlaylistName = (input) => {
     setPlaylistName(input);
-  }
+  };
+  //Handler to export playlist to sporift (fake data for now)
+  const onSaveHandler = () => {
+    let uriArray = [];
+    trackList.forEach((track) => {
+      uriArray.push(track.uri);
+    })
+    const exportPlaylist =[playlistName, uriArray];
+    console.log(exportPlaylist);
+  }; 
 
 
 
@@ -113,7 +122,7 @@ function App() {
       <SearchBar userInput={userInput} onChange={handleUserInputChange} searchForTracks={searchForTracks} tracks={searchResultsState} />
       <div className={styles.container}>
         <SearchResults key={searchResultsState} tracks={searchResultsState} trackList={trackList} addTrackHandler={addTrackHandler} />
-        <Playlist tracks={trackList} removeTrackHandler={removeTrackHandler} handlePlaylistName={handlePlaylistName}/>
+        <Playlist tracks={trackList} removeTrackHandler={removeTrackHandler} handlePlaylistName={handlePlaylistName} onSaveHandler={onSaveHandler}/>
       </div>
 
     </div>
