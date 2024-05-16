@@ -11,6 +11,8 @@ function App() {
   const [userInput, setUserInput] = useState('');
   //Track state of search results so we can re render search result component on search
   const [searchResultsState, setSearchResultsState] = useState([]);
+  //Track state of the current tracklist
+  const [trackList, setTracklist] = useState([]);
 
   //Fake track data to feed to track component until we connect to API 
   const tracks = [
@@ -44,22 +46,6 @@ function App() {
 
   ];
 
-  const trackList = [
-    {
-    
-        name: "Gorilla",
-        album: "No Thank You",
-        artist: "Little Simz",
-        id: '1'
-  
-    },
-    {
-      name: "How Much",
-      album: "Grime MC",
-      artist: "JME",
-      id: '3'
-    }
-  ];
 
   const searchResults = []; //Array to store results from each search, will be set to searchResultsState
   let searchForTracks = (searchString) => {
@@ -95,13 +81,27 @@ function App() {
   }
 
 
+  const addTrackHandler = (addTrack) => {
+    setTracklist([...trackList, addTrack]);
+    
+    
+  }
+
+  const removeTrackHandler = (removeTrack) => {
+    const newList = trackList.filter((track) => JSON.stringify(track)!== JSON.stringify(removeTrack));
+    console.log(newList);
+
+    setTracklist(newList);
+    
+  }
+
   return (
     <div className='App'>
       <header><h1>Jammming</h1></header>
       <SearchBar userInput={userInput} onChange={handleUserInputChange} searchForTracks={searchForTracks} tracks={searchResultsState} />
       <div className={styles.container}>
-        <SearchResults key={searchResultsState} tracks={searchResultsState} />
-        <Playlist tracks={trackList}/>
+        <SearchResults key={searchResultsState} tracks={searchResultsState} trackList={trackList} addTrackHandler={addTrackHandler} />
+        <Playlist tracks={trackList} removeTrackHandler={removeTrackHandler}/>
       </div>
 
     </div>

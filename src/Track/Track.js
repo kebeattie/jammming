@@ -2,6 +2,29 @@ import React from 'react';
 import styles from './Track.module.css';
 
 export default function Track(props) {
+
+    const clickAddHandler = () => {
+        let track = {
+            name: props.name,
+            album: props.album,
+            artist: props.artist,
+            id: props.id
+        }
+
+        props.addTrackHandler(track);
+    }
+
+    const handleRemoveTrackHandler = () => {
+        let track = {
+            name: props.name,
+            album: props.album,
+            artist: props.artist,
+            id: props.id
+        }
+
+        props.removeTrackHandler(track);
+    }
+
     return (
         <>
             <div className={styles.trackContainer}>
@@ -18,8 +41,9 @@ export default function Track(props) {
                 </div>
                 <div className={styles.rightSide}>
 
-                     {props.add  && <p className={styles.addButton}>&#43;</p>} 
-                     {!props.add && <p className={styles.addButton}>&#8722;</p>}
+                     {props.add  && <p className={styles.addButton} onClick={clickAddHandler}>&#43;</p>} 
+                     {!props.add && <p className={styles.addButton} onClick={handleRemoveTrackHandler}>&#8722;</p>}
+                     
 
                 </div>
 
