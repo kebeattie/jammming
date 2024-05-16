@@ -82,7 +82,13 @@ function App() {
 
 
   const addTrackHandler = (addTrack) => {
-    setTracklist([...trackList, addTrack]);
+    if(!JSON.stringify(trackList).includes(JSON.stringify(addTrack))) {
+      setTracklist([...trackList, addTrack]);
+    }
+    else {
+      alert('This track is already in the current playlist.')
+    }
+    
     
     
   }
