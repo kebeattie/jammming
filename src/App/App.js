@@ -46,7 +46,7 @@ function App() {
 
   //Search request
   async function search() {
-    const endpoint = `https://api.spotify.com/v1/search?q=${userInput}&type=track`
+    const endpoint = `https://api.spotify.com/v1/search?q=${userInput}&type=track`;
 
     fetch(endpoint, {
       method: 'GET',
@@ -58,7 +58,27 @@ function App() {
       .then(data => setSpotifyResults(data.tracks));
   };
 
+  //Create playlist request
+  // async function createPlaylist() {
+  //   const endpoint = 'https://api.spotify.com/v1/users/kebeattie98/playlists';
+  //   console.log(accessToken);
+  //   fetch(endpoint, {
+  //     method: 'POST',
+  //     headers: {
+  //       'Content-Type': 'application/json',
+  //       'Authorization': 'Bearer ' + accessToken
+  //     },
+  //     json : {
+  //       name: playlistName,
+  //       description: "Added from Jammmin app",
+  //       public: false
+  //     }
+  //   }).then(response => response.json())
+  //     .then(data => console.log(data));
 
+
+    
+  // }
 
   let j = 0;
   const searchResults = []; //Array to store results from each search, will be set to searchResultsState
@@ -144,6 +164,7 @@ function App() {
     })
     const exportPlaylist = [playlistName, uriArray];
     console.log(exportPlaylist);
+    // createPlaylist();
 
     setTracklist([]);
     setPlaylistName('');
