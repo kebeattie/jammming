@@ -35,7 +35,7 @@ function App() {
   };
 
 
-  //Create playlist request
+  //Create playlist requesta
   async function createPlaylist() {
     let token = getAccessToken();
     const endpoint = 'https://api.spotify.com/v1/users/kebeattie98/playlists';
