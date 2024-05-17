@@ -1,9 +1,9 @@
 import styles from './App.module.css';
 import React, { useState, useEffect } from 'react';
 import SearchBar from '../SearchBar/SearchBar';
-//import Track from '../Track/Track';
 import SearchResults from '../SearchResults/SearchResults';
 import Playlist from '../Playlist/Playlist';
+import getAccessToken from '../API_requests';
 
 
 function App() {
@@ -17,68 +17,44 @@ function App() {
   //Track state of playlsit name
   const [playlistName, setPlaylistName] = useState('')
   //Track access token
-  const [accessToken, setAccessToken] = useState('');
   //Track spotify results
   const [spotifyResults, setSpotifyResults] = useState({});
 
-
-  //Use this to get API token, will update so it only calls after current token expires
-  useEffect(() => {
-    const clientId = 'eb8ca22582be4f4b902ced6061756e1a';
-    const clientSecret = '957ed936baf148c580b4ae07f403ddbf';
-
-    fetch("https://accounts.spotify.com/api/token", {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/x-www-form-urlencoded',
-        'Authorization': 'Basic ' + btoa(clientId + ':' + clientSecret)
-
-      },
-      body: 'grant_type=client_credentials'
-
-    }).then(result => result.json())
-      .then(data => setAccessToken(data.access_token));;
-  }, [])
-
-
-
-
-
   //Search request
   async function search() {
-    const endpoint = `https://api.spotify.com/v1/search?q=${userInput}&type=track`;
-
+    let endpoint = `https://api.spotify.com/v1/search?q=${userInput}&type=track`;
+    let token = getAccessToken();
     fetch(endpoint, {
       method: 'GET',
       headers: {
         'Content-Type': 'application/json',
-        'Authorization': 'Bearer ' + accessToken
+        'Authorization': 'Bearer ' + token
       }
     }).then(response => response.json())
       .then(data => setSpotifyResults(data.tracks));
   };
 
+
   //Create playlist request
-  // async function createPlaylist() {
-  //   const endpoint = 'https://api.spotify.com/v1/users/kebeattie98/playlists';
-  //   console.log(accessToken);
-  //   fetch(endpoint, {
-  //     method: 'POST',
-  //     headers: {
-  //       'Content-Type': 'application/json',
-  //       'Authorization': 'Bearer ' + accessToken
-  //     },
-  //     json : {
-  //       name: playlistName,
-  //       description: "Added from Jammmin app",
-  //       public: false
-  //     }
-  //   }).then(response => response.json())
-  //     .then(data => console.log(data));
+  async function createPlaylist() {
+    let token = getAccessToken();
+    const endpoint = 'https://api.spotify.com/v1/users/kebeattie98/playlists';
+    
+    fetch(endpoint, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer ' + token
+      },
+      body: JSON.stringify({name: playlistName})
+        
+      
+    }).then(response => response.json())
+      .then(data => console.log(data));
 
 
     
-  // }
+  }
 
   let j = 0;
   const searchResults = []; //Array to store results from each search, will be set to searchResultsState
@@ -91,11 +67,6 @@ function App() {
 
       for (let i = 0; i < 10; i++) {
 
-        //console.log(spotifyResults.items[i].name); //this gets us track name
-        //console.log(spotifyResults.items[i].artists[0].name); //this gets us artist name
-        //console.log(spotifyResults.items[i].album.name); //this gets us album name
-        //console.log(spotifyResults.items[i].uri); //this gets us uri
-        //console.log(spotifyResults.items[i]);
 
 
         searchResults.push({
@@ -164,14 +135,14 @@ function App() {
     })
     const exportPlaylist = [playlistName, uriArray];
     console.log(exportPlaylist);
-    // createPlaylist();
+    createPlaylist();
 
     setTracklist([]);
     setPlaylistName('');
   };
 
 
-
+  
 
   return (
     <div className='App'>
