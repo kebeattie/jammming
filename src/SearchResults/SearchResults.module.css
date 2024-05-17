@@ -1,3 +1,13 @@
 .searchResultsContainer {
+    margin-top: 50px;
     width: 33vw;
+    background-color: #141619;
+    border-radius: 10px;
+    color: white;
+}
+
+h2 {
+    width: 95%;
+    margin: 0 auto;
+    padding: 25px;
 }

@@ -30,7 +30,7 @@ export default function Track(props) {
             <div className={styles.trackContainer}>
                 <div className={styles.leftSide}>
                     <h3>{props.name}</h3>
-                    <p>
+                    <p className={styles.info}>
                         <span className={styles.artist}>{props.artist}</span>
                         <span className={styles.vl}></span>
                         <span className={styles.album}>{props.album}</span>

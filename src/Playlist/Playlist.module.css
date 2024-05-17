@@ -4,6 +4,7 @@ html {
 
 .playListHeading {
     text-align: left;
+    
 }
 
 .container {
@@ -12,16 +13,33 @@ html {
     flex-direction: column;
     width: 33vw;
     align-items: baseline;
+    margin-top: 50px;
+    color: white;
+    margin-top: 50px;
+    width: 33vw;
+    background-color: #141619;
+    border-radius: 10px;
+
 }
 
 .playListTitleInput {
-    width: 100%;
+    box-sizing: content-box;
+    width: 95%;
+    margin: 0 auto 50px auto;
     height: 40%;
     border: none;
+    background-color: white;
+    color: #141619;;
+    padding: 15px 0; 
     
 }
+
+/* ::placeholder {
+    color: white;
+} */
 
 .playListForm {
     
     width: 100%;
 }
+

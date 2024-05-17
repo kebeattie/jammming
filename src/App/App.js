@@ -35,8 +35,24 @@ function App() {
       .then(data => setSpotifyResults(data.tracks));
   };
 
-
-  //Create playlist requesta
+  //Request to add track to playlist
+  async function addTrackToPlaylist(playlistId) {
+    let trackUris = [];
+    for (let i = 0; i< trackList.length; i++) {
+      trackUris.push(trackList[i].uri);
+    }
+    
+    let token = getAccessToken();
+    fetch(`https://api.spotify.com/v1/playlists/${playlistId}/tracks`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer ' + token
+      },
+      body: JSON.stringify({uris: trackUris})
+    })
+  }
+  //Create playlist requests
   async function createPlaylist() {
     let token = getAccessToken();
     await fetch('https://api.spotify.com/v1/users/kebeattie98/playlists', {
@@ -68,24 +84,12 @@ function App() {
   
 // };
 
-  async function addTrackToPlaylist(playlistId) {
-    console.log(playlistId);
-    let trackUris = ["spotify:track:4iV5W9uYEdYUVa79Axb7Rh","spotify:track:1301WleyT98MSxVHPZCA6M", "spotify:episode:512ojhOuo1ktJprKbVcKyQ"];
-    let token = getAccessToken();
-    fetch(`https://api.spotify.com/v1/playlists/${playlistId}/tracks`, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-        'Authorization': 'Bearer ' + token
-      },
-      body: JSON.stringify({uris: trackUris})
-    })
-  }
+  
 
 
 
 
-
+  //Store results of search in searchResults state
   let j = 0;
   const searchResults = []; //Array to store results from each search, will be set to searchResultsState
   const constructSearchResults = (spotifyResults) => {
@@ -110,12 +114,9 @@ function App() {
       }
       j++
     }
-    console.log(searchResults);
   }
 
-
-
-
+//A function that calls for search methods to run if form submitted and userinput is not empty
   let searchForTracks = () => {
     if (userInput.length > 0) {
     // getUser();
@@ -137,6 +138,7 @@ function App() {
 
 
   };
+
   //Handler to change state of tracklist on addition of track
   const addTrackHandler = (addTrack) => {
     //Check if the selected track is already in the tracklist
@@ -147,17 +149,19 @@ function App() {
       alert('This track is already in the current playlist.')
     }
   };
+
   //Handler to change state of tracklist on removal of track
   const removeTrackHandler = (removeTrack) => {
     const newList = trackList.filter((track) => JSON.stringify(track) !== JSON.stringify(removeTrack));
-    console.log(newList);
 
     setTracklist(newList);
   };
+
   //Handler to change state of playlist name
   const handlePlaylistName = (input) => {
     setPlaylistName(input);
   };
+
   //Handler to export playlist to spotify (fake data for now)
   const onSaveHandler = async () => {
     let uriArray = [];

@@ -4,7 +4,7 @@
 
 
 header {
-  background-color: rgb(56, 54, 54);
+  background-color: #b3b4bd;
   min-height: 10vh;
   display: flex;
   flex-direction: column;
@@ -16,11 +16,13 @@ header {
 
 
 h1 {
-  color: rgb(250, 176, 213);
+  color: #141619;
 }
 
 .container {
   display: flex;
   justify-content: space-evenly;
+  background-color: #b3b4bd;
+  
 }
 
