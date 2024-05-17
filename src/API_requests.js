@@ -21,12 +21,9 @@ export default function getAccessToken() {
         window.location = accessUrl;
     }
 
+};
 
 
-
-
-
-}
 
 
 

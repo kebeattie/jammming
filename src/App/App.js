@@ -3,7 +3,8 @@ import React, { useState, useEffect } from 'react';
 import SearchBar from '../SearchBar/SearchBar';
 import SearchResults from '../SearchResults/SearchResults';
 import Playlist from '../Playlist/Playlist';
-import getAccessToken from '../API_requests';
+import getAccessToken from '../API_requests'
+
 
 
 function App() {
@@ -38,9 +39,7 @@ function App() {
   //Create playlist requesta
   async function createPlaylist() {
     let token = getAccessToken();
-    const endpoint = 'https://api.spotify.com/v1/users/kebeattie98/playlists';
-    
-    fetch(endpoint, {
+    await fetch('https://api.spotify.com/v1/users/kebeattie98/playlists', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -50,11 +49,42 @@ function App() {
         
       
     }).then(response => response.json())
-      .then(data => console.log(data));
+      .then(data => addTrackToPlaylist(data.id));
 
-
+      
+  
     
   }
+
+//   async function getUser() {
+//     let userId;
+  
+//     fetch('https://api.spotify.com/v1/me', 
+//   ).then(response => response.json()
+//   ).then(jsonResponse => {
+//     userId = jsonResponse.id;
+//     console.log((userId));
+//   })
+  
+// };
+
+  async function addTrackToPlaylist(playlistId) {
+    console.log(playlistId);
+    let trackUris = ["spotify:track:4iV5W9uYEdYUVa79Axb7Rh","spotify:track:1301WleyT98MSxVHPZCA6M", "spotify:episode:512ojhOuo1ktJprKbVcKyQ"];
+    let token = getAccessToken();
+    fetch(`https://api.spotify.com/v1/playlists/${playlistId}/tracks`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer ' + token
+      },
+      body: JSON.stringify({uris: trackUris})
+    })
+  }
+
+
+
+
 
   let j = 0;
   const searchResults = []; //Array to store results from each search, will be set to searchResultsState
@@ -88,6 +118,7 @@ function App() {
 
   let searchForTracks = () => {
     if (userInput.length > 0) {
+    // getUser();
     search();
     constructSearchResults(spotifyResults);
     setSearchResultsState(searchResults);
@@ -128,14 +159,16 @@ function App() {
     setPlaylistName(input);
   };
   //Handler to export playlist to spotify (fake data for now)
-  const onSaveHandler = () => {
+  const onSaveHandler = async () => {
     let uriArray = [];
     trackList.forEach((track) => {
       uriArray.push(track.uri);
     })
     const exportPlaylist = [playlistName, uriArray];
-    console.log(exportPlaylist);
+    
+
     createPlaylist();
+    
 
     setTracklist([]);
     setPlaylistName('');
