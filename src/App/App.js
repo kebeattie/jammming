@@ -10,7 +10,7 @@ function App() {
 
   //Track state of user input in search bar
   const [userInput, setUserInput] = useState('');
-  //Track state of search results so we can re render search result component on search
+  //Track state of search results so we can re render search result component on search test
   const [searchResultsState, setSearchResultsState] = useState([]);
   //Track state of the current tracklist
   const [trackList, setTracklist] = useState([]);
