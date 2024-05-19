@@ -21,6 +21,8 @@ function App() {
   //Track spotify results
   const [spotifyResults, setSpotifyResults] = useState({});
 
+  const [userId, setUserId] = useState('');
+
   //Search request
   async function search() {
     let endpoint = `https://api.spotify.com/v1/search?q=${userInput}&type=track`;
@@ -54,8 +56,9 @@ function App() {
   }
   //Create playlist requests
   async function createPlaylist() {
+    console.log(userId);
     let token = getAccessToken();
-    await fetch('https://api.spotify.com/v1/users/kebeattie98/playlists', {
+    await fetch(`https://api.spotify.com/v1/users/${userId}/playlists`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -72,18 +75,48 @@ function App() {
     
   }
 
-//   async function getUser() {
-//     let userId;
-  
-//     fetch('https://api.spotify.com/v1/me', 
-//   ).then(response => response.json()
-//   ).then(jsonResponse => {
-//     userId = jsonResponse.id;
-//     console.log((userId));
-//   })
-  
-// };
+  async function getUser() {
+    let token = getAccessToken();
+    console.log(token)
+    fetch('https://api.spotify.com/v1/me', {
+      method: 'GET',
+      headers: { 
+        'Authorization': 'Bearer ' + token
+      }
+    }).then(response => response.json())
+      .then(data => setUserId(data.id));
 
+};
+
+  // savePlaylist(name, trackUris) {
+  //   if (!name || !trackUris.length) {
+  //     return;
+  //   }
+
+  //   const accessToken = Spotify.getAccessToken();
+  //   const headers = { Authorization: `Bearer ${accessToken}` };
+  //   let userId;
+
+  //   return fetch('https://api.spotify.com/v1/me', {headers: headers}
+  //   ).then(response => response.json()
+  //   ).then(jsonResponse => {
+  //     userId = jsonResponse.id;
+  //     return fetch(`https://api.spotify.com/v1/users/${userId}/playlists`, {
+  //       headers: headers,
+  //       method: 'POST',
+  //       body: JSON.stringify({name: name})
+  //     }).then(response => response.json()
+  //     ).then(jsonResponse => {
+  //       const playlistId = jsonResponse.id;
+  //       return fetch(`https://api.spotify.com/v1/users/${userId}/playlists/${playlistId}/tracks`, {
+  //         headers: headers,
+  //         method: 'POST',
+  //         body: JSON.stringify({uris: trackUris})
+  //       });
+  //     });
+  //   });
+  // }
+  // };
   
 
 
@@ -119,7 +152,7 @@ function App() {
 //A function that calls for search methods to run if form submitted and userinput is not empty
   let searchForTracks = () => {
     if (userInput.length > 0) {
-    // getUser();
+    getUser();
     search();
     constructSearchResults(spotifyResults);
     setSearchResultsState(searchResults);
