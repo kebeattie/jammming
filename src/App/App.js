@@ -36,7 +36,6 @@ function App() {
     }).then(response => response.json())
       .then(data => setSpotifyResults(data.tracks));
 
-      console.log(spotifyResults);
   };
 
   //Request to add track to playlist
