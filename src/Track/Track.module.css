@@ -8,10 +8,12 @@ html {
 
   .artist {
     padding-right: 5px;
+    word-wrap: break-word;
   }
 
   .album {
     padding-left: 5px;
+    word-wrap: break-word;
   }
 
   .addButton {
@@ -34,11 +36,14 @@ html {
     margin: 0 auto;
     border-radius: 10px;
     border: #b3b4bd 3px solid;
+    word-wrap: break-word;
+    
   }
 
 
   .info, h3 {
     margin-left: 10px;
+    word-wrap: break-word;
   }
 
   hr {
@@ -48,3 +53,17 @@ html {
     
   }
   
+
+  @media only screen and (max-width: 650px)  {
+    .trackContainer {
+      width: 80%;
+    }
+
+    .album{
+      display: none;
+    }
+
+    .vl {
+      display: none;
+    }
+  }

@@ -57,3 +57,33 @@ button:hover {
     background-color: #241452;
     color: white;
 }
+
+
+@media only screen and (max-width: 650px) {
+    .container {
+        width: 45vw;
+    }
+
+    .playListTitleInput {
+        height: 5%;
+        padding: 10px 0;
+        margin: 5px auto 38x auto;
+    }
+
+    .submitButton {
+        width: 50%;
+        font-size: 0.8rem;
+        height: 40%;
+    }
+}
+
+@media only screen and (min-width: 651px) and (max-width: 1500px) {
+
+    .submitButton {
+        font-size: 1.2rem;
+        width: 50%;
+    }
+    .container {
+        width: 45vw;
+    }
+}
