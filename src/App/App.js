@@ -118,10 +118,9 @@ function App() {
   }
 
   //A function that calls for search methods to run if form submitted and userinput is not empty
-  let searchForTracks = async () => {
+  let searchForTracks = () => {
     if (userInput.length > 0) {
-      // await getUser();
-      await search();
+      search();
       constructSearchResults(spotifyResults);
       setSearchResultsState(searchResults);
     }
