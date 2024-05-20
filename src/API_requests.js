@@ -1,5 +1,5 @@
 const clientId = 'eb8ca22582be4f4b902ced6061756e1a';
-const redirectUri = 'https://jammming-8c27.onrender.com';
+const redirectUri = window.location.href;
 let accessToken;
 
 export default function getAccessToken() {
