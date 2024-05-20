@@ -25,7 +25,7 @@ html {
 .playListTitleInput {
     box-sizing: content-box;
     width: 95%;
-    margin: 0 auto 50px auto;
+    margin: 25px auto 50px auto;
     height: 40%;
     border: none;
     background-color: white;

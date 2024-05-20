@@ -8,7 +8,7 @@ export default function Tracklist(props) {
         <>
             <div className={styles.container}>
                 {props.tracks.map(track => (
-                    <Track {...track} key={track.id} add={false} removeTrackHandler={props.removeTrackHandler} />
+                    <Track {...track} key={track.uri} add={false} removeTrackHandler={props.removeTrackHandler} />
 
                 ))}
 

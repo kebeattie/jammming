@@ -10,7 +10,7 @@ export default function SearchResults(props) {
                 <h2>Results</h2>
 
                 {props.tracks.map(track => (
-                    <Track {...track} key={track.id} add={true}  addTrackHandler={props.addTrackHandler} />
+                    <Track {...track} key={track.uri} add={true}  addTrackHandler={props.addTrackHandler} />
 
                 ))}
 

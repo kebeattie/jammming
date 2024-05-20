@@ -3,8 +3,7 @@ import React, { useState, useEffect } from 'react';
 import SearchBar from '../SearchBar/SearchBar';
 import SearchResults from '../SearchResults/SearchResults';
 import Playlist from '../Playlist/Playlist';
-import getAccessToken from '../API_requests'
-
+import getAccessToken from '../API_requests';
 
 
 function App() {
@@ -17,11 +16,13 @@ function App() {
   const [trackList, setTracklist] = useState([]);
   //Track state of playlsit name
   const [playlistName, setPlaylistName] = useState('')
-  //Track access token
   //Track spotify results
   const [spotifyResults, setSpotifyResults] = useState({});
-
+  //Track userId
   const [userId, setUserId] = useState('');
+
+
+  getUser();
 
   //Search request
   async function search() {
@@ -35,15 +36,17 @@ function App() {
       }
     }).then(response => response.json())
       .then(data => setSpotifyResults(data.tracks));
+
+      console.log(spotifyResults);
   };
 
   //Request to add track to playlist
   async function addTrackToPlaylist(playlistId) {
     let trackUris = [];
-    for (let i = 0; i< trackList.length; i++) {
+    for (let i = 0; i < trackList.length; i++) {
       trackUris.push(trackList[i].uri);
     }
-    
+
     let token = getAccessToken();
     fetch(`https://api.spotify.com/v1/playlists/${playlistId}/tracks`, {
       method: 'POST',
@@ -51,12 +54,12 @@ function App() {
         'Content-Type': 'application/json',
         'Authorization': 'Bearer ' + token
       },
-      body: JSON.stringify({uris: trackUris})
+      body: JSON.stringify({ uris: trackUris })
     })
   }
   //Create playlist requests
   async function createPlaylist() {
-    console.log(userId);
+
     let token = getAccessToken();
     await fetch(`https://api.spotify.com/v1/users/${userId}/playlists`, {
       method: 'POST',
@@ -64,63 +67,28 @@ function App() {
         'Content-Type': 'application/json',
         'Authorization': 'Bearer ' + token
       },
-      body: JSON.stringify({name: playlistName})
-        
-      
+      body: JSON.stringify({ name: playlistName })
+
+
     }).then(response => response.json())
       .then(data => addTrackToPlaylist(data.id));
 
-      
-  
-    
+
+
+
   }
 
   async function getUser() {
     let token = getAccessToken();
-    console.log(token)
     fetch('https://api.spotify.com/v1/me', {
       method: 'GET',
-      headers: { 
+      headers: {
         'Authorization': 'Bearer ' + token
       }
     }).then(response => response.json())
       .then(data => setUserId(data.id));
 
-};
-
-  // savePlaylist(name, trackUris) {
-  //   if (!name || !trackUris.length) {
-  //     return;
-  //   }
-
-  //   const accessToken = Spotify.getAccessToken();
-  //   const headers = { Authorization: `Bearer ${accessToken}` };
-  //   let userId;
-
-  //   return fetch('https://api.spotify.com/v1/me', {headers: headers}
-  //   ).then(response => response.json()
-  //   ).then(jsonResponse => {
-  //     userId = jsonResponse.id;
-  //     return fetch(`https://api.spotify.com/v1/users/${userId}/playlists`, {
-  //       headers: headers,
-  //       method: 'POST',
-  //       body: JSON.stringify({name: name})
-  //     }).then(response => response.json()
-  //     ).then(jsonResponse => {
-  //       const playlistId = jsonResponse.id;
-  //       return fetch(`https://api.spotify.com/v1/users/${userId}/playlists/${playlistId}/tracks`, {
-  //         headers: headers,
-  //         method: 'POST',
-  //         body: JSON.stringify({uris: trackUris})
-  //       });
-  //     });
-  //   });
-  // }
-  // };
-  
-
-
-
+  };
 
   //Store results of search in searchResults state
   let j = 0;
@@ -149,15 +117,14 @@ function App() {
     }
   }
 
-//A function that calls for search methods to run if form submitted and userinput is not empty
+  //A function that calls for search methods to run if form submitted and userinput is not empty
   let searchForTracks = () => {
     if (userInput.length > 0) {
-    getUser();
-    search();
-    constructSearchResults(spotifyResults);
-    setSearchResultsState(searchResults);
+      search();
+      constructSearchResults(spotifyResults);
+      setSearchResultsState(searchResults);
     }
-    
+
   };
 
 
@@ -201,22 +168,22 @@ function App() {
     trackList.forEach((track) => {
       uriArray.push(track.uri);
     })
-    const exportPlaylist = [playlistName, uriArray];
-    
+
 
     createPlaylist();
-    
-
     setTracklist([]);
     setPlaylistName('');
+
   };
 
 
-  
+
+
 
   return (
     <div className='App'>
       <header><h1>Jammming</h1></header>
+
       <SearchBar userInput={userInput} onChange={handleUserInputChange} searchForTracks={searchForTracks} tracks={searchResultsState} />
       <div className={styles.container}>
         <SearchResults key={searchResultsState} tracks={searchResultsState} trackList={trackList} addTrackHandler={addTrackHandler} />
@@ -225,6 +192,11 @@ function App() {
 
     </div>
   );
+
+
 }
 
 export default App;
+
+
+//{props.add  && <p className={styles.addButton} onClick={clickAddHandler}>&#43;</p>} 
