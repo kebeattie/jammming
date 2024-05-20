@@ -16,10 +16,10 @@ export default function Playlist (props) {
     
     return (
         <>  <div className={styles.container}>
-                <h2 className={styles.playListHeading}>Playlist </h2>
+                {/* <h2 className={styles.playListHeading}>Playlist </h2> */}
                 <form className={styles.playListForm} onSubmit={submitHandler}>
                 
-                    <input type='text' placeholder='Playlist name' className={styles.playListTitleInput} onChange={inputChange}></input>
+                    <input type='text' placeholder='Playlist name' className={styles.playListTitleInput} onChange={inputChange} required></input>
                     <Tracklist tracks={props.tracks} removeTrackHandler={props.removeTrackHandler}/>
                     <button type='submit'>Save Playlist</button>
 

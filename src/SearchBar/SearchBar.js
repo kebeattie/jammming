@@ -13,18 +13,21 @@ export default function SearchBar(props) {
     }
 
     const handleSubmit = (event) => {
-        event.preventDefault();
+
         props.searchForTracks(props.userInput);
+        event.preventDefault();
     }
 
     return (
         <>
             <div className={styles.container}>
                 <form onSubmit={handleSubmit}>
-                    <input type="text" placeholder='Search for an Artist, Track Name, or Album' value={props.userInput} onChange={handleChange} />
+                    <input type="text" placeholder='Search for an Artist, Track Name, or Album' value={props.userInput} onChange={handleChange} required/>
                     <button className={styles.searchButton} type='submit'>Search</button>
                 </form>
             </div>
         </>
     )
 }
+
+
