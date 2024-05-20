@@ -24,7 +24,7 @@ function App() {
 
   getUser();
 
-  //Search request aaaa
+  //Search request 
   async function search() {
     let endpoint = `https://api.spotify.com/v1/search?q=${userInput}&type=track`;
     let token = getAccessToken();

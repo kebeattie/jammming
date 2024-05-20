@@ -19,6 +19,7 @@ html {
     width: 33vw;
     background-color: #141619;
     border-radius: 10px;
+    min-height: 57vh;
 
 }
 
@@ -43,3 +44,16 @@ html {
     width: 100%;
 }
 
+.submitButton{
+    width: 25%;
+    border-radius: 60px;
+    height: 30%;
+    font-size: 1.2rem;
+}
+
+
+button:hover {
+    cursor: pointer;
+    background-color: #241452;
+    color: white;
+}

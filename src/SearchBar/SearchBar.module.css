@@ -17,7 +17,8 @@ input {
 .container {
     display: flex;
     justify-content: center;
-    background-color: #b3b4bd;
+    /* background-color: #b3b4bd; */
+    background-color: #241452;
     
 }
 
@@ -31,4 +32,6 @@ input {
 
 .searchButton:hover {
     cursor: pointer;
+    background-color: black;
+    color: white;
 }

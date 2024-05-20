@@ -21,7 +21,7 @@ export default function Playlist (props) {
                 
                     <input type='text' placeholder='Playlist name' className={styles.playListTitleInput} onChange={inputChange} required></input>
                     <Tracklist tracks={props.tracks} removeTrackHandler={props.removeTrackHandler}/>
-                    <button type='submit'>Save Playlist</button>
+                    <button className={styles.submitButton}type='submit'>Save to Spotify</button>
 
                 </form>
             </div>
