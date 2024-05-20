@@ -13,7 +13,6 @@ export default function SearchBar(props) {
     }
 
     const handleSubmit = (event) => {
-
         props.searchForTracks(props.userInput);
         event.preventDefault();
     }

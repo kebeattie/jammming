@@ -26,9 +26,8 @@ function App() {
 
   //Search request 
   async function search() {
-    let endpoint = `https://api.spotify.com/v1/search?q=${userInput}&type=track`;
     let token = getAccessToken();
-    fetch(endpoint, {
+    fetch(`https://api.spotify.com/v1/search?q=${userInput}&type=track`, {
       method: 'GET',
       headers: {
         'Content-Type': 'application/json',
@@ -197,6 +196,3 @@ function App() {
 }
 
 export default App;
-
-
-//{props.add  && <p className={styles.addButton} onClick={clickAddHandler}>&#43;</p>} 
